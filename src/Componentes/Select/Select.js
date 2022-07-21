@@ -1,26 +1,35 @@
+import { FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import React from "react";
-class Select extends React.Component {
+class Selects extends React.Component {
     render(props) {
         return (
             <div>
-                <label>Seleccione {this.props.name}</label>
-                {this.props.item === undefined && <p>No se cargarom datos</p>}
-                {this.props.item !== undefined && 
-                    <select>
-                        {this.props.name === 'marca' ? this.props.item.map(item => {
-                            return (
-                                <option id={item.key} key={item.key}>{item.marca}</option>
-                            )
-                        }):this.props.item.map(item => {
-                            return(
-                                <option key={item.key}>{item.modelo}</option>
-                            )})
-                        }
-                    </select>
+                {this.props.item === undefined && <p>No se cargaron datos</p>}
+                {this.props.item !== undefined &&
+                    <FormControl sx={{m:1, minWidth: 100}} >
+                        <InputLabel id='demo-simple-select-label'>{this.props.name}</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label={this.props.name}
+                            autoWidth
+                            onChange={(event) => this.props.change(event)}>
+                            {this.props.name === 'Marca' ? this.props.item.map(item => {
+                                return (
+                                    <MenuItem value={item.key} key={item.key}>{item.marca}</MenuItem>
+                                )
+                            }):this.props.item.map(item => {
+                                return(
+                                    <MenuItem value={item.key} key={item.key}>{item.modelo}</MenuItem>
+                                )})
+                            }
+                        </Select>
+                    </FormControl>
                 }
             </div>
         );
     }
 }
 
-export default Select;
+
+export default Selects;
